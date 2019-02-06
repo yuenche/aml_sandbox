@@ -1,4 +1,4 @@
-if [[ $# != 7 ]] ; then
+if [[ $# != 8 ]] ; then
   printf "YOU NEED TO INCLUDE THE FOLLOWING 7 PARAMETERS SEPARATED BY A SPACE IN ORDER
   \n CONTAINER REGISTRY NAME
   \n CONTAINER REGISTRY USER NAME
@@ -17,6 +17,7 @@ imagelocation=$4
 iot_deployment_id=$5
 iot_hub_name=$6
 iot_device_id=$7
+modulename=$8
 
 echo WRITING YOUR CONFIGURATION FILE
 
@@ -33,9 +34,9 @@ echo "
                         \"minDockerVersion\": \"v1.25\",
                         \"registryCredentials\": {
                             \"linomlwoacrqaxyxcyp\": {
-                                \"address\": \"linomlwoacrqaxyxcyp.azurecr.io\",
-                                \"password\": \"z8phtwAZjGyMMiWN0XeORD9PbkC=b55q\",
-                                \"username\": \"linomlwoacrqaxyxcyp\"
+                                \"address\": \"$regname.azurecr.io\",
+                                \"password\": \"$password\",
+                                \"username\": \"$user\"
                             }
                         }
                     }
@@ -59,10 +60,10 @@ echo "
                     }
                 },
                 \"modules\": {
-                    \"deday_module\": {
+                    \"$modulename\": {
                         \"type\": \"docker\",
                         \"settings\": {
-                            \"image\": \"linomlwoacrqaxyxcyp.azurecr.io/sparkmliot01:1\",
+                            \"image\": \"$imagelocation\",
                             \"createOptions\": \"\"
                         },
                         \"status\": \"running\",
